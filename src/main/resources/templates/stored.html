@@ -11,13 +11,18 @@
     .forecast-block {
         margin-top: 50px;
     }
+    .logout {
+        float: right;
+        padding: 10px;
+    }
     </style>
 </head>
 <body>
+<form th:action="@{/logout}" method="post" class="logout">
+    <input type="submit" value="Sign Out"/>
+</form>
+
 <div class="forecast-block container">
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
     <a href="http://localhost:8080">HOME</a>
     <div>
         <table id="myTable" class="table mt-3" >
