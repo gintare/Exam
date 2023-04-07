@@ -30,7 +30,7 @@
 </form>
 <div>
     <span>Labas,</span>
-    <span th:text="${IndexModel.userName}"></span>
+    <span class="user-name" th:text="${IndexModel.userName}"></span>
 </div>
 
 <div><a href="http://localhost:8080/stored-forecasts">Išsaugoti įrašai</a></div>
@@ -91,6 +91,7 @@
         var cityName = parent.getElementsByClassName("city-name-value")[0].textContent;
         var date = parent.getElementsByClassName("date-value")[0].textContent;
         var temperature = parent.getElementsByClassName("temperature-value")[0].textContent;
+        var userName = document.getElementsByClassName("user-name")[0].textContent;
         jQuery.ajax({
             url: 'http://localhost:8080/api/forecast',
             type: "POST",
@@ -98,7 +99,8 @@
              {
                 "date": date,
                 "temperature": temperature,
-                "cityName": cityName
+                "cityName": cityName,
+                "userName": userName
              }
             ),
             contentType: "application/json"

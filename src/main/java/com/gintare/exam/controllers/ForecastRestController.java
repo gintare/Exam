@@ -19,7 +19,7 @@ public class ForecastRestController {
         Forecast entity = new Forecast();
         entity.date = model.date;
         entity.temperature = Double.toString(model.temperature);
-        entity.userId = 1;
+        entity.userName = model.userName;
         entity.city = model.cityName;
         forecastRepository.save(entity);
     }

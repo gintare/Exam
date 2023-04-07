@@ -2,7 +2,6 @@ package com.gintare.exam.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import static jakarta.persistence.GenerationType.AUTO;
@@ -15,13 +14,13 @@ public class Forecast {
     public String date;
     public String temperature;
     public String city;
-    public int userId;
+    public String userName;
 
-    public Forecast(String date, String temperature, String city, int userId) {
+    public Forecast(String date, String temperature, String city, String userName) {
         this.date = date;
         this.temperature = temperature;
         this.city = city;
-        this.userId = userId;
+        this.userName = userName;
     }
 
     public Forecast() {

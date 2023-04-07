@@ -51,7 +51,6 @@ public class ForecastController {
             userName = principal.toString();
         }
         indexModel.userName = userName;
-
         return modelAndView;
     }
 
