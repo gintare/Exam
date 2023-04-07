@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gintare.exam.models.*;
+import com.gintare.exam.repositories.ForecastRepository;
 import com.gintare.exam.services.ForecastService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,11 +27,16 @@ public class ForecastController {
     @Autowired
     private ForecastService forecastService;
 
+    @Autowired
+    ForecastRepository forecastRepository;
+
     @GetMapping("/")
-    public ModelAndView index(@RequestParam(required = false) String cityCode) throws IOException {
+    public ModelAndView index(@RequestParam(required = false) String cityCode,
+                              @RequestParam(required = false) String cityName) throws IOException {
         ModelAndView modelAndView = new ModelAndView("index");
         var indexModel = new IndexModel();
         indexModel.currentCity = cityCode;
+        indexModel.currentCityName = cityCode;//cityName;
         indexModel.cities = forecastService.getCities();
         indexModel.forecasts = forecastService.getForecasts(cityCode);
         modelAndView.addObject("IndexModel", indexModel);
@@ -40,6 +46,8 @@ public class ForecastController {
     @GetMapping("/stored-forecasts")
     public ModelAndView storedForecasts(@RequestParam(required = false) String cityCode) throws IOException {
         ModelAndView modelAndView = new ModelAndView("stored");
+        var indexModel = forecastRepository.findAll();
+        modelAndView.addObject("myForecasts", indexModel);
         return  modelAndView;
     }
 

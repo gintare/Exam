@@ -30,6 +30,8 @@
     <span th:text="${IndexModel.userName}"></span>
 </div>
 
+<div><a href="http://localhost:8080/stored-forecasts">Išsaugoti įrašai</a></div>
+
 <div class="forecast-block container">
 
     <form method="get" class="mb-3">
@@ -46,6 +48,7 @@
         <table id="myTable" class="table mt-3" >
             <thead>
             <tr>
+                <th scope="col">Miestas</th>
                 <th scope="col">Data</th>
                 <th scope="col">Temperatura</th>
                 <th scope="col"></th>
@@ -53,6 +56,7 @@
             </thead>
             <tbody>
             <tr th:each="forecast : ${IndexModel.forecasts}">
+                <td class="city-name-value" th:text="${IndexModel.currentCityName}"></td>
                 <td class="date-value" th:text="${forecast.date}"></td>
                 <td class="temperature-value" th:text="${forecast.temperature}"></td>
                 <td>
@@ -79,6 +83,7 @@
     let table = new DataTable('#myTable');
     function save(el){
         var parent = el.parentElement.parentElement;
+        var cityName = parent.getElementsByClassName("city-name-value")[0].textContent;
         var date = parent.getElementsByClassName("date-value")[0].textContent;
         var temperature = parent.getElementsByClassName("temperature-value")[0].textContent;
         jQuery.ajax({
@@ -87,7 +92,8 @@
             data: JSON.stringify(
              {
                 "date": date,
-                "temperature": temperature
+                "temperature": temperature,
+                "cityName": cityName
              }
             ),
             contentType: "application/json"
